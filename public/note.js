@@ -1,108 +1,53 @@
 // Dependencies
-// =============================================================
-var express = require("express");
-var path = require("path");
+var http = require("http");
 
-// Sets up the Express App
-// =============================================================
-var app = express();
-var PORT = 3000;
+var fs = require("fs");
 
-// Sets up the Express app to handle data parsing
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+var PORT = 8080;
 
-// Note  DATA
-// =============================================================
-var waitList = []
-
-
-var tables = [
-  {
-    routeName: "ammon",
-    name: "Ammon",
-    tableId: "t1",
-    groupSize: 4,
-    phonenumber: 1234567
-  },
-  {
-    routeName: "dilanli",
-    name: "Dilan Li",
-    tableId: "t2",
-    groupSize: 3,
-    phoneNumber: 1234678
-  },
-  {
-    routeName: "raj",
-    name: "Raj",
-    tableId: "t3",
-    groupSize: 6,
-    phoneNumber: 1234789
-  }
-];
-
-// Routes
-//-----------------------
-
-
-app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "index.html"));
-  });
-
-app.get("/notes", function(req, res) {
-    res.sendFile(path.join(__dirname, "notes.html"));
+var server = http.createServer(handleRequest);
+// Start the server
+server.listen(PORT, function() {
+    // Callback triggered when server is successfully listening.
+    console.log("Server listening on: http://localhost:" + PORT);
   });
 
 
+  // Create a function which handles incoming requests and sends responses
+  function handleRequest(req, res) {
+    // Capture the url the request is made to
+    var path = req.url;
+    // Depending on the URL, display a different HTML file.
+  switch (path) {
+  case "/":
+      return displayRoot(res);
+  case "/index.html":
+      return displayFood(res);
+  case "/notes.html":
 
-  
-  // Displays saved notes
-app.get("/api/tables", function(req, res) {
-    return res.json(tables);
+
+  // Saving the request data as a variable
+  var requestData = "";
+
+  // When the server receives data/notes...
+  req.on("data", function(data) {
+
+    // Add it to requestData.
+    requestData += data;
   });
 
-app.get("/api/tables:table", function(req, res) {
-    var selected = req.params.table;
+  // When the request has ended...
+  req.on("end", function() {
 
-    console.log(selected)
-
-    for (var i = 0; i < tables.length; i++) {
-        if (selected === tables[i].routeName) {
-            return res.json(tables[i]);
-        }
-    }
-    return res.json(false)
+    // Log (server-side) the request method, as well as the data received!
+    console.log("You did a", req.method, "with the data:\n", requestData);
+    res.end();
   });
 
-  app.get("/api/waitlist", function(req, res) {
-     res.json(waitList);
-  });
+}
 
-  // Create New Table - takes in JSON input
-app.post("/api/tables", function(req, res) {
-    // req.body hosts is equal to the JSON post sent from the user
-    // This works because of our body parsing middleware
-    console.log(tables.length)
-    //verification that tables.length is no greater than five, if so, push to waitlist
-   
-    var newRes = req.body;
-  
-    // Using a RegEx Pattern to remove spaces from newCharacter
-    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-    newRes.routeName = newRes.name.replace(/\s+/g, "").toLowerCase();
-  
-    console.log(newRes);
-    if (tables.length > 4) {
-        // alert ("Reservations are full")
-        waitList.push(newRes)
-        res.json(newRes)
-    } else {
-    tables.push(newRes);
-  
-    res.json(newRes);
-    }
-  });
 
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
+
+
+
+
