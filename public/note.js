@@ -22,7 +22,7 @@ server.listen(PORT, function() {
   case "/":
       return displayRoot(res);
   case "/index.html":
-      return displayFood(res);
+      return displaynotes(res);
   case "/notes.html":
 
 
@@ -43,6 +43,33 @@ server.listen(PORT, function() {
     console.log("You did a", req.method, "with the data:\n", requestData);
     res.end();
   });
+}
+
+
+// API Routes for returning saved notes.
+// API Routes for saving notes.
+// API Routes for deleting notes.
+
+
+
+
+
+
+app.listen(PORT, function() {
+  console.log("App listening on PORT " + PORT);
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
