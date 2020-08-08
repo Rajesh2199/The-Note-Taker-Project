@@ -3,50 +3,57 @@ var http = require("http");
 
 var fs = require("fs");
 
-var PORT = 8080;
+var express = require('express');
 
-var server = http.createServer(handleRequest);
-// Start the server
-server.listen(PORT, function() {
-    // Callback triggered when server is successfully listening.
-    console.log("Server listening on: http://localhost:" + PORT);
-  });
+var app = express ();
 
+var PORT = 3000;
 
-  // Create a function which handles incoming requests and sends responses
-  function handleRequest(req, res) {
-    // Capture the url the request is made to
-    var path = req.url;
-    // Depending on the URL, display a different HTML file.
-  switch (path) {
-  case "/":
-      return displayRoot(res);
-  case "/index.html":
-      return displaynotes(res);
-  case "/notes.html":
+var path = require ('path'); // This modules deals with file paths.
 
 
-  // Saving the request data as a variable
-  var requestData = "";
 
-  // When the server receives data/notes...
-  req.on("data", function(data) {
 
-    // Add it to requestData.
-    requestData += data;
-  });
+// Basic routes that sends user the index and note.html pages.
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
-  // When the request has ended...
-  req.on("end", function() {
+app.get("/notes", function(req, res) {
+  res.sendFile(path.join(__dirname, "notes.html"));
+});
 
-    // Log (server-side) the request method, as well as the data received!
-    console.log("You did a", req.method, "with the data:\n", requestData);
-    res.end();
-  });
-}
 
+
+
+
+
+
+
+//app.get('/api/notes', function (req, res){
+ // res.readFile('db.json')
+//}
+
+
+
+
+
+
+
+
+
+
+//app.get('/', function(req, res){
+//res.sendfile (path.join(__dirname,  'index.html')); // res.send sends a response to the website/browser on the port 3000.
+//});
+
+//app.get('/', function(req, res){
+  //res.sendfile (path.join(__dirname,  'notes.html')); // res.send sends a response to the website/browser on the port 3000.
+  //});
+  
 
 // API Routes for returning saved notes.
+
 // API Routes for saving notes.
 // API Routes for deleting notes.
 
@@ -60,18 +67,6 @@ app.listen(PORT, function() {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-}
 
 
 
