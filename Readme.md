@@ -1,10 +1,9 @@
-# My readme 
+## The Note Taker Project. 
+This is an application that allows users to write, and modify notes based on their needs. This application is built using Express.js and Node.js features as it utilizes the concepts behind ports, basic routes, api routes, and read and write file functinality.
 
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 
 
-## Description
-Custom description
+
 
 ## Table of Contents:
 - [Description](#description)
