@@ -26,10 +26,26 @@ app.get("/notes", function(req, res) {
 // The following code will create notes.
 
 app.post('/api/notes', function(req, res){
-  var note = {
-    text:req.body.text,
-  };
-}),
+// Code below reads the db.json file for any changes.
+  fs.readFile('db.json', function (err, data){
+    if (err) {
+      return console.log (err);
+    }
+    // Code below changes db.json data into JS objects by parsing
+    var newNote = JSON.parse(data);
+
+    newNote.push (req.body);
+    // Code below writes into the db.json file by Stringfiying the newNote object.
+    fs.writeFile('db.json', JSON.stringify(newNote), function(err,res){
+      if (err) {
+        return  console.log (err);
+
+      }
+      res.JSON(newNote);
+    })
+  })
+  
+});
 
 
 // API Routes for saving notes.
@@ -37,6 +53,8 @@ app.post('/api/notes', function(req, res){
 // API Routes for deleting notes.
 
 // Need to create a unique ID for each note.
+// Anything that is being stored shold have auto id 
+// call that id and 
 
 
 
