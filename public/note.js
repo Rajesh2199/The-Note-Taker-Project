@@ -23,39 +23,21 @@ app.get("/notes", function(req, res) {
   res.sendFile(path.join(__dirname, "notes.html"));
 });
 
+// The following code will create notes.
 
+app.post('/api/notes', function(req, res){
+  var note = {
+    text:req.body.text,
+  };
+}),
 
-
-
-
-
-
-//app.get('/api/notes', function (req, res){
- // res.readFile('db.json')
-//}
-
-
-
-
-
-
-
-
-
-
-//app.get('/', function(req, res){
-//res.sendfile (path.join(__dirname,  'index.html')); // res.send sends a response to the website/browser on the port 3000.
-//});
-
-//app.get('/', function(req, res){
-  //res.sendfile (path.join(__dirname,  'notes.html')); // res.send sends a response to the website/browser on the port 3000.
-  //});
-  
-
-// API Routes for returning saved notes.
 
 // API Routes for saving notes.
+// API Routes for returning saved notes.
 // API Routes for deleting notes.
+
+// Need to create a unique ID for each note.
+
 
 
 
