@@ -1,6 +1,7 @@
 ## The Note Taker Project. 
 
-
+# Heroku Link 
+https://damp-plains-41840.herokuapp.com/notes
 
 
 ## Table of Contents:
@@ -13,9 +14,10 @@ This is an application that allows users to write, and modify notes based on the
 
 
 ## Screenshot
-<img width="2043" alt="Screen Shot " src="https://user-images.githubusercontent.com/61152071/89724184-02f6da80-d9bd-11ea-808a-72fb170454e7.png">
+<img width="2045" alt="Screenshot" src="https://user-images.githubusercontent.com/61152071/90302361-eea25a00-de62-11ea-8d52-589d98ed2b1e.png">
+
 
 
 
 ## Challenges
-Understading the routing and api concepts was particularly challenging for me and I have to admit I still do not have a clear understanding how everything works together to make an application work. I continue to do more reasearch on this specific topic and plan on tackling this project again once I gain a full understanding of Express.js. 
+Understanding the routing and api concepts was particularly challenging for me. After investing significant amount of time learning about methods like get, post, and delete I was able to make this application fully functional. The application is up and running in heroku and you can access the app via link provided above.
