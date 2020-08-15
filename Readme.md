@@ -1,6 +1,6 @@
 ## The Note Taker Project. 
 
-### Heroku Link 
+### Deployed heroku Link. 
 https://damp-plains-41840.herokuapp.com/notes
 
 
